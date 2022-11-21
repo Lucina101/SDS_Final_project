@@ -6,4 +6,7 @@ RUN yarn install
 
 EXPOSE 3000
 ENV TODO_ENDPOINT http://todo:8000/
+ENV TODO_ENDPOINT1 http://todo:8000/
+ENV TODO_ENDPOINT2 http://todo:8000/
+ENV TODO_ENDPOINT3 http://todo:8000/
 CMD  yarn start

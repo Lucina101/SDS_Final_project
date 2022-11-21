@@ -9,10 +9,20 @@ function compare(a, b) {
 class App extends React.Component {
     constructor(props) {
         super(props);
-        if(process.env.TODO_ENDPOINT) {
-            this.todo_endpoint = process.env.TODO_ENDPOINT;
+        if(process.env.TODO_ENDPOINT1) {
+            this.todo_endpoint1 = process.env.TODO_ENDPOINT1;
         } else {
-            this.todo_endpoint = 'http://localhost:8000/todo/';
+            this.todo_endpoint1 = 'http://localhost:8000/todo/';
+        }
+        if(process.env.TODO_ENDPOINT2) {
+            this.todo_endpoint2 = process.env.TODO_ENDPOINT2;
+        } else {
+            this.todo_endpoint2 = 'http://localhost:8000/todo/';
+        }
+        if(process.env.TODO_ENDPOINT3) {
+            this.todo_endpoint3 = process.env.TODO_ENDPOINT3;
+        } else {
+            this.todo_endpoint3 = 'http://localhost:8000/todo/';
         }
         console.log('Using TODO endpoint at: ' + this.todo_endpoint);
         this.state = {
@@ -24,7 +34,9 @@ class App extends React.Component {
         };
         this.toggleBox = this.toggleBox.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSubmit1 = this.handleSubmit1.bind(this);
+        this.handleSubmit2 = this.handleSubmit2.bind(this);
+        this.handleSubmit3 = this.handleSubmit3.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
@@ -53,11 +65,11 @@ class App extends React.Component {
         });
     }
 
-    handleSubmit(event) {
+    handleSubmit1(event) {
         var now = new Date();
         now.setSeconds(now.getSeconds() + 5);
         const todo = {
-            title: this.state.title,
+            title: this.state.title+" 1",
             detail: this.state.detail,
             duedate: now,
             tags: [],
@@ -69,7 +81,55 @@ class App extends React.Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(todo)
         };
-        fetch(this.todo_endpoint, requestOptions)
+        fetch(this.todo_endpoint1, requestOptions)
+            .then(response => response.json())
+            .then(data => this.refresh())
+            .catch(console.log);
+        this.toggleBox();
+        event.preventDefault();
+    }
+
+    handleSubmit2(event) {
+        var now = new Date();
+        now.setSeconds(now.getSeconds() + 5);
+        const todo = {
+            title: this.state.title+" 2",
+            detail: this.state.detail,
+            duedate: now,
+            tags: [],
+            completed: this.state.completed
+        }
+        console.log('submit', todo);
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(todo)
+        };
+        fetch(this.todo_endpoint2, requestOptions)
+            .then(response => response.json())
+            .then(data => this.refresh())
+            .catch(console.log);
+        this.toggleBox();
+        event.preventDefault();
+    }
+
+    handleSubmit3(event) {
+        var now = new Date();
+        now.setSeconds(now.getSeconds() + 5);
+        const todo = {
+            title: this.state.title+" 3",
+            detail: this.state.detail,
+            duedate: now,
+            tags: [],
+            completed: this.state.completed
+        }
+        console.log('submit', todo);
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(todo)
+        };
+        fetch(this.todo_endpoint3, requestOptions)
             .then(response => response.json())
             .then(data => this.refresh())
             .catch(console.log);
@@ -78,7 +138,7 @@ class App extends React.Component {
     }
 
     refresh() {
-        fetch(this.todo_endpoint, { mode: 'cors' })
+        fetch(this.todo_endpoint1, { mode: 'cors' })
             .then(res => res.json())
             .then((data) => {
                 data.sort(compare);
@@ -111,7 +171,7 @@ class App extends React.Component {
               )}
               {opened && (
                   <div>
-                      <form onSubmit={this.handleSubmit}>
+                      <form>
                           <label>
                               Title:
                               <input
@@ -139,7 +199,9 @@ class App extends React.Component {
                                   onChange={this.handleInputChange} />
                           </label>
                           <br /><br />
-                          <input type="submit" value="Add" />
+                          <input type="submit" value="Add 1" onClick={this.handleSubmit1}/>
+                          <input type="submit" value="Add 2" onClick={this.handleSubmit2}/>
+                          <input type="submit" value="Add 3" onClick={this.handleSubmit3}/>
                           <input type="button" value="Cancel" onClick={this.toggleBox} />
                       </form>
                   </div>
