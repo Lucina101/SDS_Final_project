@@ -56,10 +56,21 @@ class Database:
 
 
 app = FastAPI()
-db = Database(redis_host=redis_host, redis_port=redis_port,server_number=server_number)
+db = None
+try :
+    db = Database(redis_host=redis_host, redis_port=redis_port,server_number=server_number)
+except:
+    db = None
 
 @app.get("/")
 def get_logs():
+    global db
+    if db == None:
+        try:
+            db = Database(redis_host=redis_host, redis_port=redis_port,server_number=server_number)
+        except:
+            raise HTTPException(status_code = 404, detail="error getting logs from server")
+
     server_log = db.get_log()
     if server_log != None:
         str_all = ""
@@ -71,6 +82,12 @@ def get_logs():
 
 @app.post("/")
 def update_logs(s:str):
+    global db
+    if db == None:
+        try:
+            db = Database(redis_host=redis_host, redis_port=redis_port,server_number=server_number)
+        except:
+            raise HTTPException(status_code = 404, detail="error getting logs from server")
 
     if s == "clear":
         try:
@@ -86,4 +103,4 @@ def update_logs(s:str):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=1323, log_level="info")
+    uvicorn.run(app, host="0.0.0.0", port=1323, log_level="info")

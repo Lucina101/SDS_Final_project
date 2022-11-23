@@ -1,0 +1,27 @@
+version: "3.9"
+
+version: "3.8"
+
+services:
+  frontend-service:
+    image : "frontend"
+    container_name: frontend
+    environment:
+      SERVER_HOST: backend
+      SERVER_PORT: 1323
+    ports:
+      - 3000:3000
+    networks:
+      - todo-net
+  backend-service:
+    image : "backend"
+    container_name: backend
+    ports:
+      - 1323:1323
+    networks:
+      - todo-net
+networks:
+    todo-net: {}
+
+
+
