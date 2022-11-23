@@ -5,12 +5,12 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: back
+      app: back1
   replicas: 1
   template:
     metadata:
       labels:
-        app: back
+        app: back1
     spec:
       volumes:
       - name: data_back
