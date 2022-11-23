@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: back-deployment
+spec:
+  selector:
+    matchLabels:
+      app: back
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: back
+    spec:
+      volumes:
+      - name: data_back
+        emptyDir: {}
+      containers:
+      - name: backend
+        image:  backend
+        env:
+        - name: SERVER_NUMBER
+          value: 1
+        ports:
+        - containerPort: 3000
+        volumeMounts:
+        - mountPath: ./data/back
+          name: data_back

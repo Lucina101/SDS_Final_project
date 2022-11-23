@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-deployment
+spec:
+  selector:
+    matchLabels:
+      app: front
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: front
+    spec:
+      volumes:
+      - name: data
+        emptyDir: {}
+      containers:
+      - name: frontend
+        image:  frontend
+        env:
+        - name: SERVER_HOST
+          value: backend
+        - name: SERVER_PORT
+          value: 1323
+        ports:
+        - containerPort: 3000
+          name: http
+          protocal: TCP
+        volumeMounts:
+        - mountPath: /data/front
+          name: data

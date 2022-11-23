@@ -31,7 +31,6 @@ class Database:
         self.redis_host = redis_host
         self.server_number = server_number
         self.instance = redis.Redis(host = redis_host, port = redis_port, db = 0)
-        self.instance.rpush('log', server_number + " default")
 
     def reconnect(self):
         self.instance = redis.Redis(host = self.redis_host, port = self.redis_port, db = 0)
@@ -73,7 +72,7 @@ def get_logs():
 
     server_log = db.get_log()
     if server_log != None:
-        str_all = ""
+        str_all = "SERVER {}\n".format(server_number)
         for s in server_log:
             str_all += s.decode('utf-8') + '\n'
         return {"log" : str_all}
