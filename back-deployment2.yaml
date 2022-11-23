@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: backend-service2
   labels:
-    app: backend-service1
+    app: backend-service2
 spec:
   ports:
     - port: 1323
@@ -16,7 +16,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: back-deployment
+  name: back-deployment2
 spec:
   selector:
     matchLabels:

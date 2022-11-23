@@ -12,11 +12,11 @@
           targetPort: 1323
       selector:
         app: back3
-    ---
+---
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-      name: back-deployment
+      name: back-deployment3
     spec:
       selector:
         matchLabels:
@@ -41,4 +41,3 @@
             volumeMounts:
             - mountPath: ./data/back
               name: databack
-    

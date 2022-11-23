@@ -16,7 +16,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: back-deployment
+  name: back-deployment1
 spec:
   selector:
     matchLabels:
