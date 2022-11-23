@@ -13,16 +13,16 @@ spec:
         app: back1
     spec:
       volumes:
-      - name: data_back
+      - name: databack
         emptyDir: {}
       containers:
-      - name: backend
+      - name: backend1
         image:  backend
         env:
-        - name: SERVER_NUMBER
-          value: 1
+        - name: 'SERVER_NUMBER'
+          value: '1'
         ports:
-        - containerPort: 3000
+        - containerPort: 1323
         volumeMounts:
         - mountPath: ./data/back
-          name: data_back
+          name: databack

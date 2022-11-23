@@ -13,20 +13,20 @@ spec:
         app: front
     spec:
       volumes:
-      - name: data
+      - name: datafront
         emptyDir: {}
       containers:
       - name: frontend
         image:  frontend
         env:
-        - name: SERVER_HOST
-          value: backend
-        - name: SERVER_PORT
-          value: 1323
+        - name: 'SERVER_HOST'
+          value: 'backend'
+        - name: 'SERVER_PORT'
+          value: '1323'
         ports:
         - containerPort: 3000
           name: http
-          protocal: TCP
+          protocol: TCP
         volumeMounts:
         - mountPath: /data/front
-          name: data
+          name: datafront
