@@ -38,14 +38,14 @@ def home_view(request: Request):
             else :
                 display_text += x.json()["log"]
         except: 
-            display_text += "server {} is dead".format(i)
+            display_text += "server {} is dead\n".format(i)
     return templates.TemplateResponse("home.html", {"request": request, "display_text": display_text})
 
 @app.post("/")
 def home_signup_view(request: Request, server:str = Form(...), input_text:str = Form(...)):
     try:
         url = 'http://' + server_host + str(server) + ":" + str(server_port) + '/'
-        x = requests.post(url, params={'s' : input_text})
+        requests.post(url, params={'s' : input_text})
     except:
         pass
     return RedirectResponse(url="/", status_code=status.HTTP_303_SEE_OTHER)
