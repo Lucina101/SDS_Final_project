@@ -1,3 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  labels:
+    app: backend-service1
+spec:
+  ports:
+    - port: 1323
+      protocol: TCP
+      targetPort: 1323
+  selector:
+    app: back1
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,7 +32,7 @@ spec:
         emptyDir: {}
       containers:
       - name: backend1
-        image:  backend
+        image:  lucina101/sds-final-backend:latest
         env:
         - name: 'SERVER_NUMBER'
           value: '1'

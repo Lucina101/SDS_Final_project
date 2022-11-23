@@ -17,7 +17,7 @@ spec:
         emptyDir: {}
       containers:
       - name: frontend
-        image:  frontend
+        image:  lucina101/sds-final-frontend:latest
         env:
         - name: 'SERVER_HOST'
           value: 'backend'
