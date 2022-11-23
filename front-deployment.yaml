@@ -47,3 +47,5 @@ spec:
         volumeMounts:
         - mountPath: /data/front
           name: datafront
+      nodeSelector:
+        piname: a

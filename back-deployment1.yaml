@@ -41,3 +41,6 @@ spec:
         volumeMounts:
         - mountPath: ./data/back
           name: databack
+      nodeSelector:
+        piname: b
+      
