@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   frontend-service:
-    image : "frontend"
+    image : "frontend" # build: ./frontend
     container_name: frontend
     environment:
       SERVER_HOST: backend
@@ -11,13 +11,28 @@ services:
       - 3000:3000
     networks:
       - todo-net
-  backend-service:
-    image : "backend"
-    container_name: backend
-    ports:
-      - 1323:1323
+  backend-service1:
+    image : "backend" # build: ./backend
+    container_name: backend1
+    environment:
+      SERVER_NUMBER: 1
     networks:
       - todo-net
+  backend-service2:
+    image: "backend" # build: ./backend
+    container_name: backend2
+    environment:
+      SERVER_NUMBER: 2
+    networks:
+      - todo-net
+  backend-service3:
+    image: "backend" # build: ./backend
+    container_name: backend3
+    environment:
+      SERVER_NUMBER: 3
+    networks:
+      - todo-net
+
 networks:
     todo-net: {}
 
