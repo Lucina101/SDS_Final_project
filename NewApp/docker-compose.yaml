@@ -1,0 +1,54 @@
+version: "3.8"
+
+services:
+  frontend-service:
+    build: ./frontend
+    #image : "frontend" 
+    container_name: frontend
+    environment:
+      SERVER_HOST: backend
+      SERVER_PORT: 1323
+    ports:
+      - 3000:3000
+    networks:
+      - todo-net
+  backend-service1:
+    #image : "backend1"  
+    build: ./backend1
+    container_name: backend1
+    environment:
+      REDIS_HOST: db
+      REDIS_PORT: 6379
+    networks:
+      - todo-net
+  backend-service2:
+    #image: "backend2" # 
+    build: ./backend2
+    container_name: backend2
+    environment:
+      REDIS_HOST: db
+      REDIS_PORT: 6379
+    networks:
+      - todo-net
+  backend-service3:
+    build: ./backend3
+    #image: "backend3" 
+    container_name: backend3
+    environment:
+      REDIS_HOST: db
+      REDIS_PORT: 6379
+    networks:
+      - todo-net
+  redis-service:
+    image: redis
+    container_name: db
+    expose: [6379]
+    command: redis-server
+    networks:
+      - todo-net
+
+networks:
+    todo-net: {}
+
+
+
