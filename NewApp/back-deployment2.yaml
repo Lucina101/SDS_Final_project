@@ -27,9 +27,9 @@ spec:
       labels:
         app: back2
     spec:
-      volumes:
-      - name: databack
-        emptyDir: {}
+      # volumes:
+      # - name: databack
+      #   emptyDir: {}
       containers:
       - name: backend2
         image:  lucina101/sds-final-backend2:latest
@@ -38,6 +38,6 @@ spec:
           value: 'db-service'
         ports:
         - containerPort: 1324
-        volumeMounts:
-        - mountPath: ./data/back
-          name: databack
+        # volumeMounts:
+        # - mountPath: ./data/back
+        #   name: databack

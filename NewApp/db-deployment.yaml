@@ -27,15 +27,15 @@ spec:
       labels:
         app: db
     spec:
-      volumes:
-      - name: dbvolume
-        emptyDir: {}
+      # volumes:
+      # - name: dbvolume
+      #   emptyDir: {}
       containers:
       - name: db
         image:  redis
         command: ["redis-server"]
         ports:
         - containerPort: 6379
-        volumeMounts:
-        - mountPath: ./var/lib
-          name: dbvolume
+        # volumeMounts:
+        # - mountPath: ./var/lib
+        #   name: dbvolume

@@ -29,9 +29,9 @@ spec:
       labels:
         app: front
     spec:
-      volumes:
-      - name: datafront
-        emptyDir: {}
+      # volumes:
+      # - name: datafront
+      #   emptyDir: {}
       containers:
       - name: frontend
         image:  lucina101/sds-final-front:latest
@@ -44,6 +44,6 @@ spec:
         - containerPort: 3000
           name: http
           protocol: TCP
-        volumeMounts:
-        - mountPath: /data/front
-          name: datafront
+        # volumeMounts:
+        # - mountPath: /data/front
+        #   name: datafront
