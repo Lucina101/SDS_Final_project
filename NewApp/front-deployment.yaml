@@ -6,10 +6,12 @@ metadata:
   labels:
     app: frontend-service
 spec:
+  type: NodePort
   ports:
     - port: 3000
       protocol: TCP
       targetPort: 3000
+      nodePort: 30050
   selector:
     app: front
 ---
@@ -27,12 +29,12 @@ spec:
       labels:
         app: front
     spec:
-      volumes:
-      - name: datafront
-        emptyDir: {}
+      # volumes:
+      # - name: datafront
+      #   emptyDir: {}
       containers:
       - name: frontend
-        image:  lucina101/sds-final-frontend:latest
+        image:  lucina101/sds-final-front:latest
         env:
         - name: 'SERVER_HOST'
           value: 'backend-service'
@@ -42,6 +44,6 @@ spec:
         - containerPort: 3000
           name: http
           protocol: TCP
-        volumeMounts:
-        - mountPath: /data/front
-          name: datafront
+        # volumeMounts:
+        # - mountPath: /data/front
+        #   name: datafront

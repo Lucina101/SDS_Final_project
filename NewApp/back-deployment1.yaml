@@ -1,0 +1,44 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service1
+  labels:
+    app: backend-service1
+spec:
+  ports:
+    - port: 1323
+      protocol: TCP
+      targetPort: 1323
+  selector:
+    app: back1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: back-deployment1
+spec:
+  selector:
+    matchLabels:
+      app: back1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: back1
+    spec:
+      # volumes:
+      # - name: databack
+      #   emptyDir: {}
+      containers:
+      - name: backend1
+        image:  lucina101/sds-final-backend1:latest
+        env:
+        - name: 'REDIS_HOST'
+          value: 'db-service'
+        ports:
+        - containerPort: 1323
+        # volumeMounts:
+        # - mountPath: ./data/back
+        #   name: databack
+      
