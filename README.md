@@ -47,8 +47,10 @@ You can directly run this in cli or save them as shell script and run
 
 # 2. Second Master Node Setup
 Make sure the second master is joining the same subnet.
+
 Then, you can do the same as the first master in step 1.4
-Note that token must be the same
+
+Note that token must be the same for all nodes in the cluster
 
 Note: If anything is going wrong(for example, it took to long to join the cluster. The server is unresponsive)
 you can try running
@@ -63,8 +65,11 @@ This will reset the k3s setting for that node.
 # 3. Worker Node Setup
 ## 3.1 Install Raspberry Pi OS
 Make sure that you allowed ssh connection during installation
+
 The step 3.2 onward will assume that you already ssh to pi.
+
 The step below are independent for each pi.
+
 ## 3.2 Modify /etc/dhcpcd.conf File (with sudo nano)
 - append the lines below to the end of the file
 ```
@@ -125,12 +130,15 @@ Note: If it took to long to start service or join the cluster, you might need to
 ```
 
 ## 3.8 Further setup
+
 Try running "kubectl get nodes" in pi, if errors occured, you probably need this further setup.
+
 ### 3.8.1 export kube config with
 ```
     export KUBECONFIG=~/.kube/config
 ```
 ### 3.8.2 Generate config file with
+
 ```
     mkdir ~/.kube 2> /dev/null
     sudo k3s kubectl config view --raw > "$KUBECONFIG"
@@ -139,7 +147,10 @@ Try running "kubectl get nodes" in pi, if errors occured, you probably need this
 ### 3.8.3 Replace config file content
 From the first master, copy the content of /etc/rancher/k3s/k3s.yaml
 The "server:" line from master is still 127.0.0.1:6443
+
+
 Change it to master_ip:6443
+
 Replace ~/.kube/config with the copied content
 
 Try running "kubectl get nodes" again, you should see the node in the cluster now.
