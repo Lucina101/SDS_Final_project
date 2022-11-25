@@ -1,7 +1,10 @@
 # Application
 This application is simple service with 3 requests and 4 different containers
+
 1 database service
+
 3 backend services(adding value to database, find average of added values, find maximum of added values)
+
 And a simple web client for request handling
 The docker file and code for each service can be found under folder backend*/ and frontend/
 
@@ -29,7 +32,9 @@ Change bind address to 0.0.0.0
 ```
 ## 1.4 First master creating cluster
 Make sure you know these values, master ip address, database port, database name, database user, and database password
+
 You can set cluster token as your choice.
+
 Replace the first 6 lines below with your configuration and run the last command
 You can directly run this in cli or save them as shell script and run
 ```bash
@@ -52,8 +57,7 @@ Then, you can do the same as the first master in step 1.4
 
 Note that token must be the same for all nodes in the cluster
 
-Note: If anything is going wrong(for example, it took to long to join the cluster. The server is unresponsive)
-you can try running
+Note: If anything is going wrong(for example, it took to long to join the cluster. The server is unresponsive) you can try running
 
 ```bash
     sudo service k3s stop
@@ -146,8 +150,8 @@ Try running "kubectl get nodes" in pi, if errors occured, you probably need this
 ```
 ### 3.8.3 Replace config file content
 From the first master, copy the content of /etc/rancher/k3s/k3s.yaml
-The "server:" line from master is still 127.0.0.1:6443
 
+The "server:" line from master should still be 127.0.0.1:6443
 
 Change it to master_ip:6443
 
