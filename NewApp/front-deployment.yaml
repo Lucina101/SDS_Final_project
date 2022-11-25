@@ -24,6 +24,8 @@ spec:
     matchLabels:
       app: front
   replicas: 1
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -44,7 +46,15 @@ spec:
         - containerPort: 3000
           name: http
           protocol: TCP
-        command: ["python", "main.py"]
         # volumeMounts:
         # - mountPath: /data/front
         #   name: datafront
+      tolerations:
+      - key: "node.kubernetes.io/not-ready"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 10
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 10

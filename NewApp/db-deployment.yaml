@@ -21,6 +21,8 @@ spec:
   selector:
     matchLabels:
       app: db
+  strategy:
+    type: Recreate
   replicas: 1
   template:
     metadata:
@@ -39,3 +41,12 @@ spec:
         # volumeMounts:
         # - mountPath: ./var/lib
         #   name: dbvolume
+      tolerations:
+      - key: "node.kubernetes.io/not-ready"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 10
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 10

@@ -21,6 +21,8 @@ spec:
   selector:
     matchLabels:
       app: back3
+  strategy:
+    type: Recreate
   replicas: 1
   template:
     metadata:
@@ -41,3 +43,12 @@ spec:
         # volumeMounts:
         # - mountPath: ./data/back
         #   name: databack
+      tolerations:
+      - key: "node.kubernetes.io/not-ready"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 10
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 10
