@@ -159,3 +159,18 @@ Replace ~/.kube/config with the copied content
 
 Try running "kubectl get nodes" again, you should see the node in the cluster now.
 
+
+
+# Deploy the application
+
+After cloning this repository, we should be able to deploy by simply running
+
+```
+    sudo bash deploy.sh
+```
+
+For resoources cleanup, you can run
+
+```
+    sudo bash cleanup.sh
+```
