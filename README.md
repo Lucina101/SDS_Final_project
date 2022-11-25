@@ -35,9 +35,9 @@ Make sure you know these values, master ip address, database port, database name
 
 You can set cluster token as your choice.
 
-Replace the first 6 lines below with your configuration and run the last command
+Replace the first 6 lines below with your configuration and run the last command.
 
-You can directly run this in cli or save them as shell script and run
+You can directly run this in cli or save them as shell script and run.
 ```bash
     master_ip=192.168.0.109
     db_port=3306
@@ -56,7 +56,7 @@ Make sure the second master is joining the same subnet.
 
 Then, you can do the same as the first master in step 1.4
 
-Note that token must be the same for all nodes in the cluster
+Note that token must be the same for all nodes in the cluster.
 
 Note: If anything is going wrong(for example, it took to long to join the cluster. The server is unresponsive) you can try running
 
@@ -69,7 +69,7 @@ This will reset the k3s setting for that node.
 
 # 3. Worker Node Setup
 ## 3.1 Install Raspberry Pi OS
-Make sure that you allowed ssh connection during installation
+Make sure that you allowed ssh connection during installation.
 
 The step 3.2 onward will assume that you already ssh to pi.
 
