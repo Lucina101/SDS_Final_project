@@ -1,9 +1,12 @@
-FROM python:3.7-buster
-
+FROM python:3.7-alpine3.15
 
 COPY . .
+
+RUN apk update && apk add bash
 
 RUN pip install -r requirements.txt
 
 EXPOSE 3000
-CMD  python
+
+cmd python main.py
+
