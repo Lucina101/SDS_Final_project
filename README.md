@@ -1,7 +1,6 @@
 # Application
 
-![Web client image](front.png)
-
+![Web client image](/front.PNG)
 
 
 This application is simple service with 3 requests and 4 different containers
