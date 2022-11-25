@@ -150,15 +150,15 @@ Try running "kubectl get nodes" in pi, if errors occured, you probably need this
     chmod 600 "$KUBECONFIG"
 ```
 ### 3.8.3 Replace config file content
-From the first master, copy the content of /etc/rancher/k3s/k3s.yaml
+    From the first master, copy the content of /etc/rancher/k3s/k3s.yaml
 
-The "server:" line from master should still be 127.0.0.1:6443
+    The "server:" line from master should still be 127.0.0.1:6443
 
-Change it to master_ip:6443
+    Change it to master_ip:6443
 
-Replace ~/.kube/config with the copied content
+    Replace ~/.kube/config with the copied content
 
-Try running "kubectl get nodes" again, you should see the node in the cluster now.
+    Try running "kubectl get nodes" again, you should see the node in the cluster now.
 
 
 
