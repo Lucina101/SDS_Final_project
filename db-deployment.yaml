@@ -23,7 +23,7 @@ spec:
       app: db
   strategy:
     type: Recreate
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
