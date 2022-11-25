@@ -10,6 +10,14 @@ sudo kubectl delete service/backend-service1
 sudo kubectl delete service/backend-service2
 sudo kubectl delete service/backend-service3
 sudo kubectl delete service/db-service
+
+sudo kubectl delete persistentvolume/redis-volume
+sudo kubectl delete persistentvolumeclaim/redis-volume-claim
+
+sudo kubectl delete ingress/ingress-front
+
+
+
 #  kubectl delete deployment/front-deployment
 #  kubectl delete deployment/back-deployment1
 #  kubectl delete deployment/back-deployment2
