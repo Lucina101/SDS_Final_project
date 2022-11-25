@@ -158,7 +158,12 @@ The "server:" line from master should still be 127.0.0.1:6443
 
 Change it to master_ip:6443
 
-Replace ~/.kube/config with the copied content
+Replace ~/.kube/config with the copied content and restart k3s-agent service
+
+```
+    sudo service k3s-agent restart
+```
+
 
 Try running "kubectl get nodes" again, you should see the node in the cluster now.
 
