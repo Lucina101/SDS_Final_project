@@ -149,7 +149,9 @@ Try running "kubectl get nodes" in pi, if errors occured, you probably need this
     sudo k3s kubectl config view --raw > "$KUBECONFIG"
     chmod 600 "$KUBECONFIG"
 ```
+
 ### 3.8.3 Replace config file content
+
     From the first master, copy the content of /etc/rancher/k3s/k3s.yaml
 
     The "server:" line from master should still be 127.0.0.1:6443
