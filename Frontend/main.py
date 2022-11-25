@@ -48,7 +48,7 @@ def home_view(request: Request):
 def home_signup_view(request: Request, server:str = Form(...), input_text:str = Form(...)):
     try:
         url = 'http://' + server_host  + ("" if server_host == 'localhost' else "1")+ ":" + str(server_port) + '/'
-        requests.post(url, params={'x' : int(input_text)})
+        requests.post(url, params={'x' : input_text})
     except:
         pass
     return RedirectResponse(url="/", status_code=status.HTTP_303_SEE_OTHER)

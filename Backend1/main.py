@@ -32,6 +32,11 @@ class Database:
         if self.instance == None:
             self.reconnect()
         return self.instance
+
+    def clear(self):
+        self.instance.set('sum', None)
+        self.instance.set('cnt', None)
+        self.instance.set('max_value', None) 
     
     def update(self, x:int):
         self.reconnect()
@@ -66,7 +71,7 @@ except:
     db = None
 
 @app.post("/")
-def insert_value(x:int):
+def insert_value(x:str):
     global db
     if db == None:
         try:
@@ -74,7 +79,10 @@ def insert_value(x:int):
         except:
             raise HTTPException(status_code = 500, detail="error connecting to db")
     try:
-        db.update(x)
+        if x == 'clear':
+            db.clean(x)
+        else:     
+            db.update(int(x))
         return {"message" : "ok"}
     except:
         raise HTTPException(status_code = 500, detail="error inserting value to db")
