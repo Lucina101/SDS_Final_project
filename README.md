@@ -36,6 +36,7 @@ Make sure you know these values, master ip address, database port, database name
 You can set cluster token as your choice.
 
 Replace the first 6 lines below with your configuration and run the last command
+
 You can directly run this in cli or save them as shell script and run
 ```bash
     master_ip=192.168.0.109
