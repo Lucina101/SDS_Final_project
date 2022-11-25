@@ -8,5 +8,4 @@ RUN pip install -r requirements.txt
 
 EXPOSE 3000
 
-cmd python main.py
-
+CMD ./run.sh
