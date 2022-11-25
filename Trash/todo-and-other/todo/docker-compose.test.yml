@@ -1,3 +1,0 @@
-sut:
-  build: .
-  command: /bin/sh -c "cd /root/todo ; export PYTHONPATH=/root/todo ; pytest tests/test_services.py::test_connectivity"

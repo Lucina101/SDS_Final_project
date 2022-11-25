@@ -1,3 +1,0 @@
-sut:
-  build: .
-  command: /bin/sh -c "cd /root/notification ; export PYTHONPATH=/root/notification ; pytest tests/test_services.py::test_connectivity"
