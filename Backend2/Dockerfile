@@ -6,9 +6,8 @@ RUN apt install redis -y
 COPY . /root/backend
 WORKDIR /root/backend
 
-
 RUN pip install -r requirements.txt
 
-EXPOSE 1323
+EXPOSE 1324
 
-CMD  ["sh", "-c", "service redis-server start && python main.py"]
+CMD ./run.sh

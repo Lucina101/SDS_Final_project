@@ -9,6 +9,6 @@ WORKDIR /root/backend
 
 RUN pip install -r requirements.txt
 
-EXPOSE 1325
+EXPOSE 1323
 
-CMD ./run.sh
+CMD  ["sh", "-c", "service redis-server start && python main.py"]

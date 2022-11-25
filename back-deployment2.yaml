@@ -7,9 +7,9 @@ metadata:
     app: backend-service2
 spec:
   ports:
-    - port: 1323
+    - port: 1324
       protocol: TCP
-      targetPort: 1323
+      targetPort: 1324
   selector:
     app: back2
 ---
@@ -21,23 +21,34 @@ spec:
   selector:
     matchLabels:
       app: back2
+  strategy:
+    type: Recreate
   replicas: 1
   template:
     metadata:
       labels:
         app: back2
     spec:
-      volumes:
-      - name: databack
-        emptyDir: {}
+      # volumes:
+      # - name: databack
+      #   emptyDir: {}
       containers:
       - name: backend2
-        image:  lucina101/sds-final-backend:latest
+        image:  lucina101/sds-final-backend2:latest
         env:
-        - name: 'SERVER_NUMBER'
-          value: '2'
+        - name: 'REDIS_HOST'
+          value: 'db-service'
         ports:
-        - containerPort: 1323
-        volumeMounts:
-        - mountPath: ./data/back
-          name: databack
+        - containerPort: 1324
+        # volumeMounts:
+        # - mountPath: ./data/back
+        #   name: databack
+      tolerations:
+      - key: "node.kubernetes.io/not-ready"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 10
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 10

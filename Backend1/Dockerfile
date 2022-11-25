@@ -11,4 +11,4 @@ RUN pip install -r requirements.txt
 
 EXPOSE 1323
 
-CMD  ["sh", "-c", "service redis-server start && python main.py"]
+CMD ./run.sh

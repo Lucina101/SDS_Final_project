@@ -6,12 +6,10 @@ metadata:
   labels:
     app: frontend-service
 spec:
-  type: NodePort
   ports:
     - port: 3000
       protocol: TCP
       targetPort: 3000
-      nodePort: 30050
   selector:
     app: front
 ---
@@ -24,19 +22,17 @@ spec:
     matchLabels:
       app: front
   replicas: 1
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
         app: front
     spec:
-      # volumes:
-      # - name: datafront
-      #   emptyDir: {}
+      volumes:
+      - name: datafront
+        emptyDir: {}
       containers:
       - name: frontend
-        image:  lucina101/sds-final-front:latest
+        image:  lucina101/sds-final-frontend:latest
         env:
         - name: 'SERVER_HOST'
           value: 'backend-service'
@@ -46,15 +42,6 @@ spec:
         - containerPort: 3000
           name: http
           protocol: TCP
-        # volumeMounts:
-        # - mountPath: /data/front
-        #   name: datafront
-      tolerations:
-      - key: "node.kubernetes.io/not-ready"
-        operator: "Exists"
-        effect: "NoExecute"
-        tolerationSeconds: 10
-      - key: "node.kubernetes.io/unreachable"
-        operator: "Exists"
-        effect: "NoExecute"
-        tolerationSeconds: 10
+        volumeMounts:
+        - mountPath: /data/front
+          name: datafront

@@ -29,17 +29,14 @@ async def root():
 @app.get("/")
 def home_view(request: Request):
     display_text = ""
-    query_str = ['average', 'maximum']
-    for i in range(2, 4):
-        url = 'http://' + server_host + ("" if server_host == 'localhost' else str(i)) + ":" + str(int(server_port) + i - 1) + '/'
+    for i in range(1, 4):
+        url = 'http://' + server_host + str(i) + ":" + str(server_port) + '/'
         try:
             x = requests.get(url)
-            if x.status_code == 200:
-                display_text += "{} value = {:.5f}\n".format(query_str[i - 2] ,x.json()[query_str[i - 2]]) 
-            elif x.status_code == 400:
-                display_text += "No data in db right now\n"
-            else:
-                display_text += "server {} is not working right\n".format(i)
+            if x.status_code != 200:
+                display_text += "server {} is not available right now\n".format(i) 
+            else :
+                display_text += x.json()["log"]
         except: 
             display_text += "server {} is dead\n".format(i)
     return templates.TemplateResponse("home.html", {"request": request, "display_text": display_text})
@@ -47,8 +44,8 @@ def home_view(request: Request):
 @app.post("/")
 def home_signup_view(request: Request, server:str = Form(...), input_text:str = Form(...)):
     try:
-        url = 'http://' + server_host  + ("" if server_host == 'localhost' else "1")+ ":" + str(server_port) + '/'
-        requests.post(url, params={'x' : int(input_text)})
+        url = 'http://' + server_host + str(server) + ":" + str(server_port) + '/'
+        requests.post(url, params={'s' : input_text})
     except:
         pass
     return RedirectResponse(url="/", status_code=status.HTTP_303_SEE_OTHER)

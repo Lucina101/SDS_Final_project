@@ -2,8 +2,7 @@ version: "3.8"
 
 services:
   frontend-service:
-    build: ./frontend
-    #image : "frontend" 
+    image : "frontend" # build: ./frontend
     container_name: frontend
     environment:
       SERVER_HOST: backend
@@ -13,37 +12,24 @@ services:
     networks:
       - todo-net
   backend-service1:
-    #image : "backend1"  
-    build: ./backend1
+    image : "backend" # build: ./backend
     container_name: backend1
     environment:
-      REDIS_HOST: db
-      REDIS_PORT: 6379
+      SERVER_NUMBER: 1
     networks:
       - todo-net
   backend-service2:
-    #image: "backend2" # 
-    build: ./backend2
+    image: "backend" # build: ./backend
     container_name: backend2
     environment:
-      REDIS_HOST: db
-      REDIS_PORT: 6379
+      SERVER_NUMBER: 2
     networks:
       - todo-net
   backend-service3:
-    build: ./backend3
-    #image: "backend3" 
+    image: "backend" # build: ./backend
     container_name: backend3
     environment:
-      REDIS_HOST: db
-      REDIS_PORT: 6379
-    networks:
-      - todo-net
-  redis-service:
-    image: redis
-    container_name: db
-    expose: [6379]
-    command: redis-server
+      SERVER_NUMBER: 3
     networks:
       - todo-net
 

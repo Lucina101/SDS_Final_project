@@ -4,11 +4,6 @@ import requests
 import redis
 import os
 
-if 'SERVER_NUMBER' in os.environ:
-    server_number = os.environ['SERVER_NUMBER']
-else:
-    server_number = '1'
-
 if 'REDIS_HOST' in os.environ:
     redis_host = os.environ['REDIS_HOST']
 else:
@@ -24,12 +19,10 @@ class Database:
     instance = None
     redis_host = 'localhost'
     redis_port = 6379
-    server_number = 1
 
-    def __init__(self, redis_host, redis_port, server_number):
+    def __init__(self, redis_host, redis_port):
         self.redis_port = 6379
         self.redis_host = redis_host
-        self.server_number = server_number
         self.instance = redis.Redis(host = redis_host, port = redis_port, db = 0)
 
     def reconnect(self):
@@ -40,18 +33,13 @@ class Database:
             self.reconnect()
         return self.instance
     
-    def update_log(self, log_str:str):
+    def get_average(self):
         self.reconnect()
-        self.instance.rpush('log', server_number + " " + log_str)
-    
-    def get_log(self):
-        self.reconnect()
-        return self.instance.lrange('log', 0, -1)
-    def clear(self):
-        self.reconnect()
-        while(self.instance.llen('log')!=0):
-            self.instance.lpop('log')
-
+        sum = self.instance.get('sum')
+        cnt = self.instance.get('cnt')
+        if sum == None:
+            return None
+        return int(sum) / int(cnt)
 
 
 app = FastAPI()
@@ -62,44 +50,18 @@ except:
     db = None
 
 @app.get("/")
-def get_logs():
+def get_average():
     global db
     if db == None:
         try:
-            db = Database(redis_host=redis_host, redis_port=redis_port,server_number=server_number)
+            db = Database(redis_host=redis_host, redis_port=redis_port)
         except:
-            raise HTTPException(status_code = 404, detail="error getting logs from server")
-
-    server_log = db.get_log()
-    if server_log != None:
-        str_all = "SERVER {}\n".format(server_number)
-        for s in server_log:
-            str_all += s.decode('utf-8') + '\n'
-        return {"log" : str_all}
-    raise HTTPException(status_code = 404, detail="error getting logs from server")
-
-
-@app.post("/")
-def update_logs(s:str):
-    global db
-    if db == None:
-        try:
-            db = Database(redis_host=redis_host, redis_port=redis_port,server_number=server_number)
-        except:
-            raise HTTPException(status_code = 404, detail="error getting logs from server")
-
-    if s == "clear":
-        try:
-            db.clear()
-        except:
-            raise HTTPException(status_code = 404, detail="error clearing logs from server")
-        return
-    try:
-        db.update_log(log_str=s)
-        return {"message" : "update ok"}
-    except:
-        raise HTTPException(status_code = 404, detail="error updating logs from server")
-
+            raise HTTPException(status_code = 500, detail="error connecting to db")
+    
+    avg = db.get_average()
+    if avg != None:
+        return {"average" : avg}
+    raise HTTPException(status_code = 400, detail="error getting average from db")
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=1323, log_level="info")
+    uvicorn.run(app, host="0.0.0.0", port=1324, log_level="info")

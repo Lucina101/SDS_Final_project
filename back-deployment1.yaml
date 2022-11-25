@@ -21,24 +21,35 @@ spec:
   selector:
     matchLabels:
       app: back1
+  strategy:
+    type: Recreate
   replicas: 1
   template:
     metadata:
       labels:
         app: back1
     spec:
-      volumes:
-      - name: databack
-        emptyDir: {}
+      # volumes:
+      # - name: databack
+      #   emptyDir: {}
       containers:
       - name: backend1
-        image:  lucina101/sds-final-backend:latest
+        image:  lucina101/sds-final-backend1:latest
         env:
-        - name: 'SERVER_NUMBER'
-          value: '1'
+        - name: 'REDIS_HOST'
+          value: 'db-service'
         ports:
         - containerPort: 1323
-        volumeMounts:
-        - mountPath: ./data/back
-          name: databack
-      
+        # volumeMounts:
+        # - mountPath: ./data/back
+        #   name: databack
+      tolerations:
+      - key: "node.kubernetes.io/not-ready"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 10
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 10
+
