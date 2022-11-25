@@ -108,7 +108,7 @@ The step below are independent for each pi.
 ```
 
 ## 3.6 reboot the system with
-``` 
+```bash
     sudo reboot
 ```
 
@@ -130,7 +130,7 @@ Run these commands
 ```
 
 Note: If it took to long to start service or join the cluster, you might need to restart the service with
-```
+```bash
     sudo service k3s-agent restart
 ```
 
@@ -139,12 +139,12 @@ Note: If it took to long to start service or join the cluster, you might need to
 Try running "kubectl get nodes" in pi, if errors occured, you probably need this further setup.
 
 ### 3.8.1 export kube config with
-```
+```bash
     export KUBECONFIG=~/.kube/config
 ```
 ### 3.8.2 Generate config file with
 
-```
+```bash
     mkdir ~/.kube 2> /dev/null
     sudo k3s kubectl config view --raw > "$KUBECONFIG"
     chmod 600 "$KUBECONFIG"
@@ -160,7 +160,7 @@ Change it to master_ip:6443
 
 Replace ~/.kube/config with the copied content and restart k3s-agent service
 
-```
+```bash
     sudo service k3s-agent restart
 ```
 
@@ -173,12 +173,12 @@ Try running "kubectl get nodes" again, you should see the node in the cluster no
 
 After cloning this repository, we should be able to deploy by simply running
 
-```
+```bash
     sudo bash deploy.sh
 ```
 
 For resoources cleanup, you can run
 
-```
+```bash
     sudo bash cleanup.sh
 ```
