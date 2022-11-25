@@ -1,10 +1,9 @@
 FROM python:3.7-buster
 
 
-COPY . /root/frontend
-WORKDIR /root/frontend
+COPY . .
 
 RUN pip install -r requirements.txt
 
 EXPOSE 3000
-CMD  python main.py
+CMD  python
