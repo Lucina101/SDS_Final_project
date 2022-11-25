@@ -1,3 +1,7 @@
+# Application
+This application is simple 
+image.png
+
 # 1. First Master Setup
 - Connect first master to the same subnet with raspberry pis
 ## 1.1 Mysql Installation
