@@ -1,16 +1,16 @@
-# 1. Master 1 Setup
-- Connnect Master 1 to the same subnet with raspberry pis
+# 1. First Master Setup
+- Connect first master to the same subnet with raspberry pis
 ## 1.1 Mysql Installation
 ```bash
     sudo apt update
     sudo apt install mysql
-    sudo mysql
 ```
 ## 1.2 Database Creation (mysql script)
+run "sudo mysql" and create database there
 ```
-    CREATE DATABASE hololive;
-    CREATE USER 'holouser'@'%' IDENTIFIED BY password;
-    GRANT ALL ON hololive.* TO 'holouser'@'%';
+    CREATE DATABASE [YOUR_DATABASE_NAME];
+    CREATE USER '[YOUR_USERNAME]'@'%' IDENTIFIED BY [YOUR_PASSWORD];
+    GRANT ALL ON [YOUR_DATABASE_NAME].* TO '[YOUR_USERNAME]'@'%';
     FLUSH PRIVILEGES;
 ```
 ## 1.3 Mysql Config Modification
@@ -35,15 +35,15 @@
 ## 1.6 Master 1 Starting
 ```bash
     chmod 775 master.sh
-    ./master.sh start
+    ./master.sh
 ```
 
 # 2. Master 2 Setup
-- Connnect Master 2 to the same subnet with raspberry pis
+- Connect Master 2 to the same subnet with raspberry pis
 - Copy the master.sh file from the first step to the directory ```/sds_final```
 ```bash
     cd sds_final
-    ./master.sh start
+    ./master.sh
 ```
 
 # 3. Worker Setup
