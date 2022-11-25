@@ -10,4 +10,4 @@ RUN pip install -r requirements.txt
 
 EXPOSE 1324
 
-CMD  ["python /root/backend/main.py"]
+CMD ./run.sh

@@ -11,4 +11,4 @@ RUN pip install -r requirements.txt
 
 EXPOSE 1323
 
-CMD  ["python3 main.py"]
+CMD ./run.sh
