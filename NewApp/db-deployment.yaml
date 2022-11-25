@@ -29,18 +29,19 @@ spec:
       labels:
         app: db
     spec:
-      # volumes:
-      # - name: dbvolume
-      #   emptyDir: {}
+      volumes:
+      - name: persistent-redis-volume
+        persistentVolumeClaim:
+          claimName: redis-volume-claim
       containers:
       - name: db
         image:  redis
         command: ["redis-server"]
         ports:
         - containerPort: 6379
-        # volumeMounts:
-        # - mountPath: ./var/lib
-        #   name: dbvolume
+        volumeMounts:
+        - mountPath: /var/lib/redis
+          name: persistent-redis-volume
       tolerations:
       - key: "node.kubernetes.io/not-ready"
         operator: "Exists"
