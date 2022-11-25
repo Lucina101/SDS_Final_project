@@ -38,6 +38,7 @@ spec:
           value: 'db-service'
         ports:
         - containerPort: 1324
+        command: ["python main.py"]
         # volumeMounts:
         # - mountPath: ./data/back
         #   name: databack
