@@ -39,7 +39,6 @@ class Database:
         sum = self.instance.get('sum')
         cnt = self.instance.get('cnt')
         mx = self.instance.get('max_value')
-        print("WTF", mx, sum, cnt)
         if sum == None or cnt == None:
             sum, cnt = 0, 0
         
