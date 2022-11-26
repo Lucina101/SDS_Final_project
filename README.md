@@ -15,10 +15,11 @@ The docker file and code for each service can be found under folder backend*/ an
 # Kubernetes cluster setup
 First of all, we have to setup kubernetes cluster. We will configure it with k3s
 # 1. Master Node Setup
-## 1.1 Install mysql with the following command
+## 1.1 Install mysql and curl with the following command
 ```bash
     sudo apt update
     sudo apt install mysql
+    sudo apt install curl
 ```
 ## 1.2 Database Creation (mysql script)
 Create database as datastore endpoint for k3s.
@@ -58,7 +59,7 @@ You can directly run this in cli or save it as shell script and run.
 
 
 # 2. Second Master Node Setup
-Make sure the second master is joining the same subnet.
+Make sure the second master is joining the same subnet and have curl installed. 
 
 Then, you can do the same as the first master in step 1.4
 
@@ -120,6 +121,8 @@ For convinience, you can set static IP address by modifying /etc/dhcpcd.conf
 ```
 
 ## 3.7 Joining the cluster
+
+Make sure curl is installed.
 
 You need to know the master ip address and by default cluster port is 6443.
 So the master_port below is assumed to be 6443
