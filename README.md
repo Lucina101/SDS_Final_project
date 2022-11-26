@@ -29,7 +29,10 @@ Create database as datastore endpoint for k3s.
     FLUSH PRIVILEGES;
 ```
 ## 1.3 Mysql Config Modification
-Change bind address to 0.0.0.0
+Change bind address in /etc/mysql/mysql.conf.d/mysqld.cnf to 0.0.0.0
+
+You can manually modify or use command below, then restart mysql.
+
 ```bash
     sudo sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/mysql.conf.d/mysqld.cnf
     sudo systemctl restart mysql
@@ -41,7 +44,7 @@ You can set cluster token as your choice.
 
 Replace the first 6 lines below with your configuration and run the last command.
 
-You can directly run this in cli or save them as shell script and run.
+You can directly run this in cli or save it as shell script and run.
 ```bash
     master_ip=192.168.0.109
     db_port=3306
@@ -52,7 +55,6 @@ You can directly run this in cli or save them as shell script and run.
 
     sudo curl -sfL https://get.k3s.io | sh -s - server   --token=$token --node-taint CriticalAddonsOnly=true:NoSchedule   --datastore-endpoint="mysql://$database_user:$database_password@tcp($master_ip:$database_port)/$database_name"
 ```
-
 
 
 # 2. Second Master Node Setup
@@ -79,9 +81,10 @@ The step 3.2 onward will assume that you already ssh to pi.
 
 The step below are independent for each pi.
 
-## 3.2 Modify /etc/dhcpcd.conf File (with sudo nano)
+## 3.2 Setup static IP address
+For convinience, you can set static IP address by modifying /etc/dhcpcd.conf 
 - append the lines below to the end of the file
-```
+```bash
     interface eth0
     static ip_address=192.168.0.{pi_ipadd}/24
     static_routers=192.168.0.1
@@ -89,8 +92,15 @@ The step below are independent for each pi.
 ```
 - {pi_ipadd} is different for each raspberry pi, from 116 to 119 (or number of your choice as long as they're in the router subnet)
 
-## 3.3 Modify /etc/sysctl.conf File (with sudo nano)
+## 3.3 Modify /boot/cmdline.txt File
 - append the lines below to the end of the file
+``` 
+    cgroup_enable = memory
+    cgroup_memory = 1
+```
+
+## 3.4 Disable IPV6 
+- append these lines at the end of the file /etc/sysctl.conf 
 ``` 
     net.ipv6.conf.all.disable_ipv6 = 1
     net.ipv6.conf.default.disable_ipv6 = 1
@@ -98,17 +108,10 @@ The step below are independent for each pi.
     net.ipv6.conf.eth0.disable_ipv6 = 1
 ```
 
-## 3.4 Modify /etc/rc.local File (with sudo nano)
-- append the line below before the line ```exit 0``` in the file
+## 3.5 Reload Procps Service by default 
+- append this line below before the line "exit 0" in /etc/rc.local 
 ``` 
     service procps reload
-```
-
-## 3.5 Modify /boot/cmdline.txt File (with sudo nano)
-- append the lines below to the end of the file
-``` 
-    cgroup_enable = memory
-    cgroup_memory = 1
 ```
 
 ## 3.6 reboot the system with
@@ -160,7 +163,7 @@ From the first master, copy the content of /etc/rancher/k3s/k3s.yaml
 
 The "server:" line from master should still be 127.0.0.1:6443
 
-Change it to master_ip:6443
+Change it to {master_ip}:6443 (e.g 192.168.0.109:6443)
 
 Replace ~/.kube/config with the copied content and restart k3s-agent service
 
@@ -170,7 +173,6 @@ Replace ~/.kube/config with the copied content and restart k3s-agent service
 
 
 Try running "kubectl get nodes" again, you should see the node in the cluster now.
-
 
 
 # Deploy the application
