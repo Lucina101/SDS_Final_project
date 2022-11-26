@@ -119,7 +119,7 @@ Run these commands;
     master_port=6443
 
     sudo curl -sfL https://get.k3s.io | K3S_URL=https://$master_ip:$master_port \
-    K3S_TOKEN=$my_token sh -
+    K3S_TOKEN=$token sh -
 
     sudo systemctl enable --now k3s-agent
 ```
