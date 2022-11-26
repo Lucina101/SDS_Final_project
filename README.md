@@ -151,7 +151,7 @@ Change it to `{master_ip}:6443` (e.g `192.168.0.109:6443`)
 Replace `~/.kube/config` with the copied content and restart k3s-agent service by running ```sudo service k3s-agent restart```.
 
 
-Try running "kubectl get nodes" again, you should see the node in the cluster now.
+Try running ```kubectl get nodes``` again, you should see the node in the cluster now.
 
 
 ## Deploy the application
