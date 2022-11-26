@@ -190,7 +190,7 @@ After cloning this repository, we should be able to deploy by simply running
 
 You can open http://localhost in second master browser and see web client.
 
-For resoources cleanup, you can run
+For resources cleanup, you can run
 
 ```bash
     sudo bash cleanup.sh
