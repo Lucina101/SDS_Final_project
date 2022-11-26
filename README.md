@@ -63,7 +63,7 @@ Make sure the second master is joining the same subnet and have `curl` installed
 Then, do the same as the first master node's step 1.4. 
 The token must be **the same** for all nodes in the cluster.
 
-*Note: If anything is going wrong, for example, it took to long to join the cluster or the server is unresponsive, you can try running ```sudo service k3s stop``` and ```sudo /usr/local/bin/k3s-killall.sh``` to reset the k3s setting for that node.*
+*Note: If anything is going wrong, for example, it took too long to join the cluster or the server is unresponsive, you can try running ```sudo service k3s stop``` and ```sudo /usr/local/bin/k3s-killall.sh``` to reset the k3s setting for that node.*
 
 ## 3. Setup the Worker Nodes
 For each pi, do these following steps:
