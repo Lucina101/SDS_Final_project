@@ -124,7 +124,7 @@ Run these commands;
     sudo systemctl enable --now k3s-agent
 ```
 
-*Note: If it took to long to start service or join the cluster, you might need to restart the service with ```sudo service k3s-agent restart```*
+*Note: If it took too long to start service or join the cluster, you might need to restart the service with ```sudo service k3s-agent restart```*
 
 
 ### 3.8 Additional setup
