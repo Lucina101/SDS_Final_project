@@ -15,19 +15,5 @@ sudo kubectl delete deployment/back-deployment2
 sudo kubectl delete deployment/back-deployment3
 sudo kubectl delete deployment/db-deployment
 
-
-#sudo kubectl delete persistentvolume/redis-volume
-#sudo kubectl delete persistentvolumeclaim/redis-volume-claim
-
-
-
-
-#  kubectl delete deployment/front-deployment
-#  kubectl delete deployment/back-deployment1
-#  kubectl delete deployment/back-deployment2
-#  kubectl delete deployment/back-deployment3
-
-#  kubectl delete service/frontend-service
-#  kubectl delete service/backend-service1
-#  kubectl delete service/backend-service2
-#  kubectl delete service/backend-service3
+# sudo kubectl delete persistentvolume/redis-volume
+# sudo kubectl delete persistentvolumeclaim/redis-volume-claim
