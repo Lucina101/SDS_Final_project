@@ -22,11 +22,13 @@ First of all, we have to setup kubernetes cluster. We will configure it with k3s
     sudo apt install curl
 ```
 ## 1.2 Database Creation (mysql script)
-Create database as datastore endpoint for k3s.
+Login to mysql as root and create database as datastore endpoint for k3s.
+
+Replace DATABASE_* with your configuration.
 ```
-    CREATE DATABASE [YOUR_DATABASE_NAME];
-    CREATE USER '[YOUR_USERNAME]'@'%' IDENTIFIED BY [YOUR_PASSWORD];
-    GRANT ALL ON [YOUR_DATABASE_NAME].* TO '[YOUR_USERNAME]'@'%';
+    CREATE DATABASE [DATABASE_NAME];
+    CREATE USER '[DATABASE_USERNAME]'@'%' IDENTIFIED BY [DATABASE_PASSWORD];
+    GRANT ALL ON [DATABASE_NAME].* TO '[DATABASE_USERNAME]'@'%';
     FLUSH PRIVILEGES;
 ```
 ## 1.3 Mysql Config Modification
