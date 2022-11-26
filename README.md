@@ -81,7 +81,7 @@ The step 3.2 onward will assume that you already ssh to pi.
 
 The step below are independent for each pi.
 
-## 3.2 Setup static IP address
+## 3.2 Setup static IP address With Root Privilege(sudo)
 For convinience, you can set static IP address by modifying /etc/dhcpcd.conf 
 - append the lines below to the end of the file
 ```bash
@@ -92,14 +92,14 @@ For convinience, you can set static IP address by modifying /etc/dhcpcd.conf
 ```
 - {pi_ipadd} is different for each raspberry pi, from 116 to 119 (or number of your choice as long as they're in the router subnet)
 
-## 3.3 Modify /boot/cmdline.txt File
+## 3.3 Modify /boot/cmdline.txt File With Root Privilege(sudo)
 - append the lines below to the end of the file
 ``` 
     cgroup_enable = memory
     cgroup_memory = 1
 ```
 
-## 3.4 Disable IPV6 
+## 3.4 Disable IPV6 With Root Privilege(sudo)
 - append these lines at the end of the file /etc/sysctl.conf 
 ``` 
     net.ipv6.conf.all.disable_ipv6 = 1
@@ -108,7 +108,7 @@ For convinience, you can set static IP address by modifying /etc/dhcpcd.conf
     net.ipv6.conf.eth0.disable_ipv6 = 1
 ```
 
-## 3.5 Reload Procps Service by default 
+## 3.5 Reload Procps Service by default With Root Privilege(sudo)
 - append this line below before the line "exit 0" in /etc/rc.local 
 ``` 
     service procps reload
