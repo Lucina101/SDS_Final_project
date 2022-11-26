@@ -16,7 +16,7 @@ First of all, we have to setup the Kubernetes cluster. We will configure it with
 Run these following commands
 ```bash
     sudo apt update
-    sudo apt install mysql
+    sudo apt install mysql-server
     sudo apt install curl
 ```
 ### 1.2 Create the Database
@@ -73,7 +73,7 @@ Make sure to allow the SSH connection during the installation.
 SSH into the Pi.
 
 ### 3.2 Setup the static IP address
-For the convenience, set thestatic IP address by appending the lines below to the end of `/etc/dhcpcd.conf`. **You have to use `sudo` to modify the file.**
+For the convenience, set the static IP address by appending the lines below to the end of `/etc/dhcpcd.conf`. **You have to use `sudo` to modify the file.**
 ```
     interface eth0
     static ip_address=192.168.0.{pi_ipadd}/24
