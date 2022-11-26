@@ -63,7 +63,7 @@ Make sure the second master is joining the same subnet and have `curl` installed
 Then, do the same as the first master node's step 1.4. 
 The token must be **the same** for all nodes in the cluster.
 
-*Note: If anything is going wrong, for example, it took too long to join the cluster or the server is unresponsive, you can try running ```sudo service k3s stop``` and ```sudo /usr/local/bin/k3s-killall.sh``` to reset the k3s setting for that node.*
+*Note: If anything is going wrong, for example, it takes too long to join the cluster or the server is unresponsive, you can try running ```sudo service k3s stop``` and ```sudo /usr/local/bin/k3s-killall.sh``` to reset the k3s setting for that node.*
 
 ## 3. Setup the Worker Nodes
 For each pi, do these following steps:
@@ -80,7 +80,7 @@ For the convenience, set the static IP address by appending the lines below to t
     static_routers=192.168.0.1
     static domain_name_servers=8.8.8.8
 ```
-- `{pi_ipadd}` is different for each raspberry pi, varying from 116 to 119 (or any numbers of your choice as long as they're in the router subnet.)
+- `{pi_ipadd}` must be different for each raspberry Pi, varying from 116 to 119 (or any numbers of your choice as long as they're in the router subnet.)
 
 ### 3.3 Setup the Cgroup
 Append the lines below to the end of `/boot/cmdline.txt`. **You have to use `sudo` to modify the file.**
@@ -124,7 +124,7 @@ Run these commands;
     sudo systemctl enable --now k3s-agent
 ```
 
-*Note: If it took too long to start service or join the cluster, you might need to restart the service with ```sudo service k3s-agent restart```*
+*Note: If it takes too long to start service or join the cluster, you might need to restart the service with ```sudo service k3s-agent restart```*
 
 
 ### 3.8 Additional setup
